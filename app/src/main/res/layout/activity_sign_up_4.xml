@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_1"
+    tools:context=".SignUp_4" >
+
+    <TextView
+        android:id="@+id/c_account_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/create_account"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/eContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/emergency"
+        android:textColor="@color/cream"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_account_4" />
+
+    <TextView
+        android:id="@+id/tContact_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/cnt_1"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eContact" />
+
+    <Spinner
+        android:id="@+id/spinner_relation_1"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tContact_1" />
+
+    <EditText
+        android:id="@+id/pContact_1"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/contact"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/spinner_relation_1"
+        app:layout_constraintTop_toBottomOf="@+id/tContact_1" />
+
+    <TextView
+        android:id="@+id/tContact_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/cnt_2"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_relation_1" />
+
+    <Spinner
+        android:id="@+id/spinner_relation_2"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tContact_2" />
+
+    <EditText
+        android:id="@+id/pContact_2"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/contact"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toEndOf="@+id/spinner_relation_2"
+        app:layout_constraintTop_toBottomOf="@+id/tContact_2" />
+
+    <TextView
+        android:id="@+id/tContact_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/cnt_3"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_relation_2" />
+
+    <Spinner
+        android:id="@+id/spinner_relation_3"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tContact_3" />
+
+    <EditText
+        android:id="@+id/pContact_3"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/contact"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toEndOf="@+id/spinner_relation_3"
+        app:layout_constraintTop_toBottomOf="@+id/tContact_3" />
+
+    <TextView
+        android:id="@+id/p_phone_vericiation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:hint="Your Number"
+        android:textColorHint="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pContact_3" />
+
+
+    <EditText
+        android:id="@+id/emergency_number"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/contact"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        android:textColorLink="@color/grey"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <Button
+        android:id="@+id/vFinish"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/round_shape_border"
+        android:text="@string/finish"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emergency_number" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:text="Emergency Number"
+        android:textColor="@android:color/white"
+        android:textColorHint="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pContact" />
+
+    <EditText
+        android:id="@+id/pContact"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/contact"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/p_phone_vericiation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

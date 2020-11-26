@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:title="Profile"
+            android:icon="@drawable/person">
+        </item>
+        <item
+            android:id="@+id/nav_home"
+            android:title="Home"
+            android:icon="@drawable/home_icon">
+        </item>
+        <item
+            android:id="@+id/nav_addFamily"
+            android:title="Friends"
+            android:icon="@drawable/add_family">
+        </item>
+        <item
+            android:id="@+id/nav_family_journey"
+            android:title="Others Travel Info"
+            android:icon="@drawable/travel">
+        </item>
+        <item
+            android:id="@+id/nav_trip_info"
+            android:title="Own Travel Info"
+            android:icon="@drawable/travel">
+        </item>
+
+        <item
+            android:id="@+id/nav_logout"
+            android:title="Log Out"
+            android:icon="@drawable/log_out">
+        </item>
+    </group>
+
+
+</menu>

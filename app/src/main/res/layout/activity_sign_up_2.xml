@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_1"
+    tools:context=".SignUp" >
+
+    <TextView
+        android:id="@+id/c_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/create_account"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="@string/personal"
+        android:textColor="@color/cream"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_account" />
+
+    <TextView
+        android:id="@+id/tDob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/dob"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pInfo" />
+
+    <EditText
+        android:id="@+id/pDob"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/date"
+        android:includeFontPadding="true"
+        android:inputType="date"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tDob" />
+
+    <TextView
+        android:id="@+id/tCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/country"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pDob" />
+
+    <EditText
+        android:id="@+id/PCountry"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/country_name"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tCountry" />
+
+    <TextView
+        android:id="@+id/tState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/state"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PCountry" />
+
+    <EditText
+        android:id="@+id/pState"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/state_name"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tState" />
+
+    <TextView
+        android:id="@+id/tPlc_station"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+
+        android:text="@string/police_st"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pState" />
+
+    <EditText
+        android:id="@+id/P_Plc_station"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/plc_st_name"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tPlc_station" />
+
+    <TextView
+        android:id="@+id/tStreet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/street"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/P_Plc_station" />
+
+    <EditText
+        android:id="@+id/pStreet"
+        android:layout_width="290dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/street_name"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tStreet" />
+
+    <Button
+        android:id="@+id/continue_2"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_shape_border"
+        android:text="@string/button_continue"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pStreet" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

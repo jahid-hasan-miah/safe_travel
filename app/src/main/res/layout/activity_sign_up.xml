@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_1"
+    tools:context=".SignUp" >
+    <TextView
+        android:id="@+id/c_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:text="@string/create_account"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tNname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/full_name"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/c_account" />
+
+    <EditText
+        android:id="@+id/pName"
+        android:layout_width="290dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/hint_name"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tNname" />
+
+    <TextView
+        android:id="@+id/tEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/hint_email"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pName" />
+
+    <EditText
+        android:id="@+id/pEmail"
+        android:layout_width="290dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/hint_fullemail"
+        android:includeFontPadding="true"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tEmail" />
+
+    <TextView
+        android:id="@+id/tPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/hint_password"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/pEmail" />
+
+
+    <EditText
+        android:id="@+id/fPassword"
+        android:layout_width="290dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/hint_pass"
+        android:includeFontPadding="true"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
+
+        android:paddingRight="5dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tPassword" />
+
+    <TextView
+        android:id="@+id/t_cPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/confirm_pass"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fPassword" />
+
+    <EditText
+        android:id="@+id/cPassword"
+        android:layout_width="290dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_shape_border"
+        android:ems="10"
+        android:hint="@string/hint_pass"
+        android:includeFontPadding="true"
+        android:inputType="textPassword"
+        android:paddingLeft="8dp"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/cream"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/t_cPassword" />
+
+    <Button
+        android:id="@+id/continue_1"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/round_shape_border"
+        android:text="@string/button_continue"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cPassword" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,113 @@
+<resources>
+    <string name="app_name">VSS</string>
+    <string name="forgot_pass"><u>Forgot Password?</u></string>
+    <string name="register"><u>Register Now</u></string>
+    <string name="no_account">Don\'t have an account ?</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="create_account"><b>Create an Account</b></string>
+    <string name="full_name">Full Name</string>
+    <string name="hint_fullemail">john@gmail.com</string>
+    <string name="hint_name">John Doe</string>
+    <string name="hint_pass">..................</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="button_continue">Continue</string>
+    <string name="personal">Personal Information</string>
+    <string name="dob">Date Of Birth</string>
+    <string name="date">dd/mm/yyyy</string>
+    <string name="country">Country</string>
+    <string name="country_name">Bangladesh</string>
+    <string name="state">State</string>
+    <string name="state_name">Gazipur</string>
+    <string name="police_st">Police Station</string>
+    <string name="plc_st_name">Joydevpur</string>
+    <string name="street">Street</string>
+    <string name="street_name">609,Great wall city,Chowrasta</string>
+    <string name="medical_info">Medical Information</string>
+    <string name="blood">Blood Group</string>
+    <string name="bld_group">Select Blood Group</string>
+    <string name="diabetics">Diabetics</string>
+    <string name="asthma">Asthma</string>
+    <string name="yes">Positive</string>
+    <string name="no">Negative</string>
+    <string name="emergency">Emergency Contacts</string>
+    <string name="cnt_1">Contact 1</string>
+    <string name="cnt_2">Contact 2</string>
+    <string name="cnt_3">Contact 3</string>
+    <string name="relation">Choose Relation</string>
+    <string name="father">Father</string>
+    <string name="mother">Mother</string>
+    <string name="brother">Brother</string>
+    <string name="contact">01685045178</string>
+    <string name="verify">Verify Your Number</string>
+    <string name="snd_code">Send Code</string>
+    <string name="v_code">######</string>
+    <string name="finish">Verify and Finish</string>
+
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="updateaccident">Update Accident</string>
+    <string name="device">Connect Device To Engage Trip</string>
+    <string name="qr">Engage Trip by QR Code</string>
+    <string name="call">Emergency Call</string>
+    <string name="car_number">Dhaka Metro xxxxx</string>
+    <string name="qr_btn">Scan QR</string>
+    <string name="car">Car Number</string>
+    <string name="trip">Welcome To New Trip</string>
+    <string name="current_location">Current Location</string>
+    <string name="destionation">Destination</string>
+    <string name="location">Location</string>
+    <string name="Accident_Info">Accident Info</string>
+    <string name="Accident_place">Place of Accident</string>
+    <string name="Accident_picture">Picture of Accident</string>
+    <string name="post">Update Post</string>
+
+    //blood group spinner items
+    <string-array name="Spinner_items">
+        <item>Choose</item>
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+
+    </string-array>
+
+    //relation spinner item
+    <string-array name="Spinner_items_relation">
+        <item>Choose</item>
+        <item>Father</item>
+        <item>Mother</item>
+        <item>Brother</item>
+        <item>Sister</item>
+        <item>Uncle</item>
+        <item>Aunty</item>
+    </string-array>
+    <string name="title_activity_home_page">homePage</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+
+</resources>
