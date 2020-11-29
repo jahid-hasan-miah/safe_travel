@@ -79,64 +79,63 @@ public class SignUp extends AppCompatActivity {
     }
 
 
-     private void registerUser(String name, String email, String password, String confirm_passwoord) {
-                //email and password is valid show progress and dialouge
-                progressDialog.show();
+    private void registerUser(String name, String email, String password, String confirm_passwoord) {
+        //email and password is valid show progress and dialouge
+        progressDialog.show();
 
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(SignUp.this, (Task<AuthResult> task) -> {
-                            if (task.isSuccessful()) {
-                                String device_token= FirebaseInstanceId.getInstance().getToken();
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(SignUp.this, (Task<AuthResult> task) -> {
+                    if (task.isSuccessful()) {
+                        String device_token = FirebaseInstanceId.getInstance().getToken();
 
-                                Toast success = Toast.makeText(SignUp.this, "Data Recorded Successfully", Toast.LENGTH_SHORT);
-                                success.show();
-                                progressDialog.dismiss();
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                currentUserId=mAuth.getCurrentUser().getUid();
-                                userReference= FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-                                HashMap userMap=new HashMap();
-                                userMap.put("name",name);
-                                userMap.put("email",email);
-                                userMap.put("password",password);
-                                userMap.put("devicetoken",device_token);
-
-                                userReference.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
-                                    @Override
-                                    public void onComplete(@NonNull Task task) {
-                                        if(task.isSuccessful()) {
-                                            Toast success=Toast.makeText(SignUp.this,"Data Recorded Successfully",Toast.LENGTH_SHORT);
-                                            success.show();
-                                            progressDialog.dismiss();
-                                        }
-                                        else {
-                                            String messege=task.getException().getMessage();
-                                            progressDialog.setMessage("Error Occurd");
-                                        }
-                                    }
-                                });
-                                openActivitySignup_2();
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                progressDialog.dismiss();
-
-                                Toast.makeText(SignUp.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-
-                            }
-
-
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
+                        Toast success = Toast.makeText(SignUp.this, "Data Recorded Successfully", Toast.LENGTH_SHORT);
+                        success.show();
                         progressDialog.dismiss();
-                        Toast.makeText(SignUp.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        currentUserId = mAuth.getCurrentUser().getUid();
+                        userReference = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+                        HashMap userMap = new HashMap();
+                        userMap.put("name", name);
+                        userMap.put("email", email);
+                        userMap.put("password", password);
+                        userMap.put("devicetoken", device_token);
 
-            public void openActivitySignup_2() {
-                Intent intent = new Intent(SignUp.this, SignUp_2.class);
-                startActivity(intent);
+                        userReference.updateChildren(userMap).addOnCompleteListener(new OnCompleteListener() {
+                            @Override
+                            public void onComplete(@NonNull Task task) {
+                                if (task.isSuccessful()) {
+                                    Toast success = Toast.makeText(SignUp.this, "Data Recorded Successfully", Toast.LENGTH_SHORT);
+                                    success.show();
+                                    progressDialog.dismiss();
+                                } else {
+                                    String messege = task.getException().getMessage();
+                                    progressDialog.setMessage("Error Occurd");
+                                }
+                            }
+                        });
+                        openActivitySignup_2();
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        progressDialog.dismiss();
+
+                        Toast.makeText(SignUp.this, "Authentication failed.",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(SignUp.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
+    }
+
+    public void openActivitySignup_2() {
+        Intent intent = new Intent(SignUp.this, SignUp_2.class);
+        startActivity(intent);
+    }
 
 }

@@ -38,11 +38,11 @@ public class createPost extends AppCompatActivity {
 
     private ImageButton SelectPostImage;
     private Button UpdatePostButton;
-    private EditText car_number,accident_spot;
+    private EditText car_number, accident_spot;
 
     private static final int Gallery_Pick = 1;
     private Uri ImageUri;
-    private String Description_car,Description_location;
+    private String Description_car, Description_location;
 
     private StorageReference PostsImagesRefrence;
     private DatabaseReference UsersRef, PostsRef;
@@ -70,14 +70,13 @@ public class createPost extends AppCompatActivity {
 
         SelectPostImage = (ImageButton) findViewById(R.id.select_image);
         UpdatePostButton = (Button) findViewById(R.id.update_post);
-        car_number =(EditText) findViewById(R.id.car_number);
-        accident_spot =(EditText) findViewById(R.id.accident_location);
+        car_number = (EditText) findViewById(R.id.car_number);
+        accident_spot = (EditText) findViewById(R.id.accident_location);
         loadingBar = new ProgressDialog(this);
 
         SelectPostImage.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 OpenGallery();
             }
         });
@@ -85,8 +84,7 @@ public class createPost extends AppCompatActivity {
 
         UpdatePostButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 ValidatePostInfo();
             }
         });
@@ -94,22 +92,15 @@ public class createPost extends AppCompatActivity {
 
     private void ValidatePostInfo() {
         Description_car = car_number.getText().toString();
-        Description_location=accident_spot.getText().toString();
+        Description_location = accident_spot.getText().toString();
 
-        if(ImageUri == null)
-        {
+        if (ImageUri == null) {
             Toast.makeText(this, "Please select post image...", Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(Description_car))
-        {
+        } else if (TextUtils.isEmpty(Description_car)) {
             Toast.makeText(this, "Please Enter car Number", Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(Description_location))
-        {
+        } else if (TextUtils.isEmpty(Description_location)) {
             Toast.makeText(this, "Please Enter Accident Location", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             loadingBar.setTitle("Adding New Post");
             loadingBar.setMessage("Please wait, while updating your new post...");
             loadingBar.show();
@@ -139,7 +130,7 @@ public class createPost extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
 
-                        downloadUrl=uri.toString();
+                        downloadUrl = uri.toString();
                         Toast.makeText(createPost.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
 
                         SavingPostInformationToDatabase();
@@ -153,10 +144,8 @@ public class createPost extends AppCompatActivity {
     private void SavingPostInformationToDatabase() {
         UsersRef.child(current_user_id).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(dataSnapshot.exists())
-                {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
                     String userFullName = dataSnapshot.child("name").getValue().toString();
                     String userProfileImage = dataSnapshot.child("profileimage").getValue().toString();
 
@@ -167,22 +156,18 @@ public class createPost extends AppCompatActivity {
                     postsMap.put("time", saveCurrentTime);
                     postsMap.put("carnumber", Description_car);
                     postsMap.put("accidentspot", Description_location);
-                    postsMap.put("postimage",downloadUrl);
+                    postsMap.put("postimage", downloadUrl);
                     postsMap.put("name", userFullName);
                     postsMap.put("profileimage", userProfileImage);
                     PostsRef.child(current_user_id + postRandomName).updateChildren(postsMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
-                                public void onComplete(@NonNull Task task)
-                                {
-                                    if(task.isSuccessful())
-                                    {
+                                public void onComplete(@NonNull Task task) {
+                                    if (task.isSuccessful()) {
                                         SendUserToMainActivity();
                                         Toast.makeText(createPost.this, "New Post is updated successfully.", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         Toast.makeText(createPost.this, "Error Occured while updating your post.", Toast.LENGTH_SHORT).show();
                                         loadingBar.dismiss();
                                     }
@@ -209,18 +194,16 @@ public class createPost extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==Gallery_Pick && resultCode==RESULT_OK && data!=null)
-        {
+        if (requestCode == Gallery_Pick && resultCode == RESULT_OK && data != null) {
             ImageUri = data.getData();
             SelectPostImage.setImageURI(ImageUri);
         }
     }
-    private void SendUserToMainActivity()
-    {
+
+    private void SendUserToMainActivity() {
         Intent mainIntent = new Intent(createPost.this, NewsFeed.class);
         startActivity(mainIntent);
     }

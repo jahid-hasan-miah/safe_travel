@@ -29,8 +29,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FindFriends extends AppCompatActivity {
 
     private RecyclerView friendlist;
-    private DatabaseReference UsersRef,FriendRef,FriendListRef;
-    private Button search,myFriend,myPendingRequest;
+    private DatabaseReference UsersRef, FriendRef, FriendListRef;
+    private Button search, myFriend, myPendingRequest;
     private EditText inputSearch;
     private String online_user_id;
     private FirebaseAuth mAuth;
@@ -40,13 +40,13 @@ public class FindFriends extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_friends);
 
-        Button search=(Button)findViewById(R.id.search_btn);
-        Button myFriend=(Button)findViewById(R.id.my_friend);
-        Button myPendingRequest=(Button)findViewById(R.id.my_pending_friend);
-        inputSearch=(EditText)findViewById(R.id.search);
+        Button search = (Button) findViewById(R.id.search_btn);
+        Button myFriend = (Button) findViewById(R.id.my_friend);
+        Button myPendingRequest = (Button) findViewById(R.id.my_pending_friend);
+        inputSearch = (EditText) findViewById(R.id.search);
 
         mAuth = FirebaseAuth.getInstance();
-        online_user_id=mAuth.getCurrentUser().getUid();
+        online_user_id = mAuth.getCurrentUser().getUid();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
         FriendRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(online_user_id);
         FriendListRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests").child(online_user_id);
@@ -84,7 +84,6 @@ public class FindFriends extends AppCompatActivity {
         });
 
 
-
     }
 
     private void PendingFriendRequest() {
@@ -95,24 +94,23 @@ public class FindFriends extends AppCompatActivity {
                                 R.layout.friend_list,
                                 friendViewHolder.class,
                                 FriendListRef
-                        )
-                {
+                        ) {
 
                     @Override
                     protected void populateViewHolder(friendViewHolder viewHolder, FriendList model, int i) {
 
-                        final String userID=getRef(i).getKey();
+                        final String userID = getRef(i).getKey();
                         UsersRef.child(userID).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
-                                    final String username=dataSnapshot.child("name").getValue().toString();
-                                    final String useremail=dataSnapshot.child("email").getValue().toString();
-                                    final String profileImage=dataSnapshot.child("profileimage").getValue().toString();
+                                if (dataSnapshot.exists()) {
+                                    final String username = dataSnapshot.child("name").getValue().toString();
+                                    final String useremail = dataSnapshot.child("email").getValue().toString();
+                                    final String profileImage = dataSnapshot.child("profileimage").getValue().toString();
 
                                     viewHolder.setName(username);
                                     viewHolder.setEmail(useremail);
-                                    viewHolder.setProfileimage(getApplicationContext(),profileImage);
+                                    viewHolder.setProfileimage(getApplicationContext(), profileImage);
                                 }
                             }
 
@@ -125,10 +123,10 @@ public class FindFriends extends AppCompatActivity {
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String visit_user_id=getRef(i).getKey();
+                                String visit_user_id = getRef(i).getKey();
 
-                                Intent intent = new Intent(FindFriends.this,PersonalInfo.class);
-                                intent.putExtra("visit_user_id",visit_user_id);
+                                Intent intent = new Intent(FindFriends.this, PersonalInfo.class);
+                                intent.putExtra("visit_user_id", visit_user_id);
                                 startActivity(intent);
                             }
                         });
@@ -145,23 +143,22 @@ public class FindFriends extends AppCompatActivity {
                                 R.layout.friend_list,
                                 myFriendViewHolder.class,
                                 FriendRef
-                        )
-                {
+                        ) {
 
                     @Override
                     protected void populateViewHolder(myFriendViewHolder viewHolder, Friends model, int i) {
 
                         viewHolder.setDate(model.getDate());
-                        final String userID=getRef(i).getKey();
+                        final String userID = getRef(i).getKey();
                         UsersRef.child(userID).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                if(dataSnapshot.exists()){
-                                    final String username=dataSnapshot.child("name").getValue().toString();
-                                    final String profileImage=dataSnapshot.child("profileimage").getValue().toString();
+                                if (dataSnapshot.exists()) {
+                                    final String username = dataSnapshot.child("name").getValue().toString();
+                                    final String profileImage = dataSnapshot.child("profileimage").getValue().toString();
 
                                     viewHolder.setName(username);
-                                    viewHolder.setProfileimage(getApplicationContext(),profileImage);
+                                    viewHolder.setProfileimage(getApplicationContext(), profileImage);
                                 }
                             }
 
@@ -174,10 +171,10 @@ public class FindFriends extends AppCompatActivity {
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String visit_user_id=getRef(i).getKey();
+                                String visit_user_id = getRef(i).getKey();
 
-                                Intent intent = new Intent(FindFriends.this,PersonalInfo.class);
-                                intent.putExtra("visit_user_id",visit_user_id);
+                                Intent intent = new Intent(FindFriends.this, PersonalInfo.class);
+                                intent.putExtra("visit_user_id", visit_user_id);
                                 startActivity(intent);
                             }
                         });
@@ -197,8 +194,7 @@ public class FindFriends extends AppCompatActivity {
                                 R.layout.friend_list,
                                 friendViewHolder.class,
                                 firebaseSearchQuery
-                        )
-                {
+                        ) {
 
                     @Override
                     protected void populateViewHolder(friendViewHolder viewHolder, FriendList model, int i) {
@@ -209,10 +205,10 @@ public class FindFriends extends AppCompatActivity {
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String visit_user_id=getRef(i).getKey();
+                                String visit_user_id = getRef(i).getKey();
 
-                                Intent intent = new Intent(FindFriends.this,PersonalInfo.class);
-                                intent.putExtra("visit_user_id",visit_user_id);
+                                Intent intent = new Intent(FindFriends.this, PersonalInfo.class);
+                                intent.putExtra("visit_user_id", visit_user_id);
                                 startActivity(intent);
                             }
                         });
@@ -229,19 +225,20 @@ public class FindFriends extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setProfileimage(Context ctx, String profileimage){
+        public void setProfileimage(Context ctx, String profileimage) {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.user_profile_pic);
             Picasso.with(ctx).load(profileimage).into(image);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             TextView username = (TextView) mView.findViewById(R.id.user_profile_name);
             username.setText(name);
         }
-        public void setEmail(String email){
-           TextView useremail = (TextView) mView.findViewById(R.id.user_profile_email);
+
+        public void setEmail(String email) {
+            TextView useremail = (TextView) mView.findViewById(R.id.user_profile_email);
             useremail.setText(email);
-       }
+        }
     }
 
     public static class myFriendViewHolder extends RecyclerView.ViewHolder {
@@ -251,16 +248,18 @@ public class FindFriends extends AppCompatActivity {
             super(itemView);
             mView = itemView;
         }
-        public void setProfileimage(Context ctx, String profileimage){
+
+        public void setProfileimage(Context ctx, String profileimage) {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.user_profile_pic);
             Picasso.with(ctx).load(profileimage).into(image);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             TextView username = (TextView) mView.findViewById(R.id.user_profile_name);
             username.setText(name);
         }
-        public void setDate(String date){
+
+        public void setDate(String date) {
             TextView friendDate = (TextView) mView.findViewById(R.id.user_profile_email);
             friendDate.setText(date);
         }

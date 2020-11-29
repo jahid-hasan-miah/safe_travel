@@ -24,13 +24,13 @@ import java.util.Calendar;
 
 public class PersonalInfo extends AppCompatActivity {
 
-    private TextView name,email,contact;
-    private Button send_req,cancel_req;
+    private TextView name, email, contact;
+    private Button send_req, cancel_req;
     private ImageView profilePic;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference FriendRequestRef,UsersRef,FriendRef;
-    private String senderUserID, receiverUserID,CURRENT_STATE,saveCurrentDate ;
+    private DatabaseReference FriendRequestRef, UsersRef, FriendRef;
+    private String senderUserID, receiverUserID, CURRENT_STATE, saveCurrentDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,38 +40,36 @@ public class PersonalInfo extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         senderUserID = mAuth.getCurrentUser().getUid();
 
-        receiverUserID=getIntent().getExtras().get("visit_user_id").toString();
+        receiverUserID = getIntent().getExtras().get("visit_user_id").toString();
         UsersRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        FriendRequestRef=FirebaseDatabase.getInstance().getReference().child("FriendRequests");
-        FriendRef=FirebaseDatabase.getInstance().getReference().child("Friends");
+        FriendRequestRef = FirebaseDatabase.getInstance().getReference().child("FriendRequests");
+        FriendRef = FirebaseDatabase.getInstance().getReference().child("Friends");
 
-        name=findViewById(R.id.user_name);
-        email=findViewById(R.id.user_email);
-        contact=findViewById(R.id.user_contact);
-        send_req=findViewById(R.id.send_request);
-        cancel_req=findViewById(R.id.cancel_request);
-        profilePic=findViewById(R.id.profile_pic);
+        name = findViewById(R.id.user_name);
+        email = findViewById(R.id.user_email);
+        contact = findViewById(R.id.user_contact);
+        send_req = findViewById(R.id.send_request);
+        cancel_req = findViewById(R.id.cancel_request);
+        profilePic = findViewById(R.id.profile_pic);
 
-        CURRENT_STATE="not_friends";
+        CURRENT_STATE = "not_friends";
 
 
         UsersRef.child(receiverUserID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(dataSnapshot.exists())
-                {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
 
-                        String fullname = dataSnapshot.child("name").getValue().toString();
-                        name.setText(fullname);
-                        String person_email = dataSnapshot.child("email").getValue().toString();
-                        email.setText(person_email);
-                        String person_contact = dataSnapshot.child("contact").getValue().toString();
-                        contact.setText(person_contact);
-                        String image = dataSnapshot.child("profileimage").getValue().toString();
-                        Picasso.with(PersonalInfo.this).load(image).placeholder(R.drawable.person).into(profilePic);
+                    String fullname = dataSnapshot.child("name").getValue().toString();
+                    name.setText(fullname);
+                    String person_email = dataSnapshot.child("email").getValue().toString();
+                    email.setText(person_email);
+                    String person_contact = dataSnapshot.child("contact").getValue().toString();
+                    contact.setText(person_contact);
+                    String image = dataSnapshot.child("profileimage").getValue().toString();
+                    Picasso.with(PersonalInfo.this).load(image).placeholder(R.drawable.person).into(profilePic);
 
-                        MaintainanceOfButton();
+                    MaintainanceOfButton();
 
 
                 }
@@ -86,28 +84,28 @@ public class PersonalInfo extends AppCompatActivity {
         cancel_req.setVisibility(View.INVISIBLE);
         cancel_req.setEnabled(true);
 
-        if(!senderUserID.equals(receiverUserID)){
+        if (!senderUserID.equals(receiverUserID)) {
             send_req.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     send_req.setEnabled(false);
 
-                    if(CURRENT_STATE.equals("not_friends")){
+                    if (CURRENT_STATE.equals("not_friends")) {
                         SendFriendRequestToPerson();
                     }
-                    if(CURRENT_STATE.equals("request_sent")){
+                    if (CURRENT_STATE.equals("request_sent")) {
                         CancelFriendRequest();
                     }
-                    if(CURRENT_STATE.equals("request_received")){
+                    if (CURRENT_STATE.equals("request_received")) {
                         AcceptFriendRequest();
                     }
-                    if(CURRENT_STATE.equals("friends")){
+                    if (CURRENT_STATE.equals("friends")) {
                         UnfriendExistingFriend();
                     }
                 }
             });
 
-        }else {
+        } else {
             send_req.setVisibility(View.INVISIBLE);
             cancel_req.setVisibility(View.INVISIBLE);
         }
@@ -120,15 +118,15 @@ public class PersonalInfo extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FriendRef.child(receiverUserID).child(senderUserID)
                                     .removeValue()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 send_req.setEnabled(true);
-                                                CURRENT_STATE="not_friends";
+                                                CURRENT_STATE = "not_friends";
                                                 send_req.setText("Send Friend Request");
                                                 cancel_req.setVisibility(View.INVISIBLE);
                                                 cancel_req.setEnabled(false);
@@ -153,27 +151,27 @@ public class PersonalInfo extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FriendRef.child(receiverUserID).child(senderUserID).child("date").setValue(saveCurrentDate)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
 
                                                 FriendRequestRef.child(senderUserID).child(receiverUserID)
                                                         .removeValue()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
-                                                                if(task.isSuccessful()){
+                                                                if (task.isSuccessful()) {
                                                                     FriendRequestRef.child(receiverUserID).child(senderUserID)
                                                                             .removeValue()
                                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                 @Override
                                                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                                                    if(task.isSuccessful()){
+                                                                                    if (task.isSuccessful()) {
                                                                                         send_req.setEnabled(true);
-                                                                                        CURRENT_STATE="friends";
+                                                                                        CURRENT_STATE = "friends";
                                                                                         send_req.setText("Unfriend");
                                                                                         cancel_req.setVisibility(View.INVISIBLE);
                                                                                         cancel_req.setEnabled(false);
@@ -202,15 +200,15 @@ public class PersonalInfo extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FriendRequestRef.child(receiverUserID).child(senderUserID)
                                     .removeValue()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 send_req.setEnabled(true);
-                                                CURRENT_STATE="not_friends";
+                                                CURRENT_STATE = "not_friends";
                                                 send_req.setText("Send Friend Request");
                                                 cancel_req.setVisibility(View.INVISIBLE);
                                                 cancel_req.setEnabled(false);
@@ -232,17 +230,16 @@ public class PersonalInfo extends AppCompatActivity {
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(receiverUserID)){
-                            String request_type=dataSnapshot.child(receiverUserID).child("request_type").getValue().toString();
+                        if (dataSnapshot.hasChild(receiverUserID)) {
+                            String request_type = dataSnapshot.child(receiverUserID).child("request_type").getValue().toString();
 
-                            if(request_type.equals("sent")){
-                                CURRENT_STATE="request_sent";
+                            if (request_type.equals("sent")) {
+                                CURRENT_STATE = "request_sent";
                                 send_req.setText("Cancel Friend Request");
                                 cancel_req.setVisibility(View.INVISIBLE);
                                 cancel_req.setEnabled(false);
-                            }
-                            else if(request_type.equals("received")){
-                                CURRENT_STATE="request_received";
+                            } else if (request_type.equals("received")) {
+                                CURRENT_STATE = "request_received";
                                 send_req.setText("Accept Friend Request");
                                 cancel_req.setVisibility(View.VISIBLE);
                                 cancel_req.setEnabled(true);
@@ -254,19 +251,18 @@ public class PersonalInfo extends AppCompatActivity {
                                     }
                                 });
                             }
-                        }
-                        else {
+                        } else {
                             FriendRef.child(senderUserID)
                                     .addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                           if(dataSnapshot.hasChild(receiverUserID)){
-                                               CURRENT_STATE="friends";
-                                               send_req.setText("Unfriend");
-                                               cancel_req.setVisibility(View.INVISIBLE);
-                                               cancel_req.setEnabled(false);
+                                            if (dataSnapshot.hasChild(receiverUserID)) {
+                                                CURRENT_STATE = "friends";
+                                                send_req.setText("Unfriend");
+                                                cancel_req.setVisibility(View.INVISIBLE);
+                                                cancel_req.setEnabled(false);
 
-                                           }
+                                            }
                                         }
 
                                         @Override
@@ -290,15 +286,15 @@ public class PersonalInfo extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             FriendRequestRef.child(receiverUserID).child(senderUserID)
                                     .child("request_type").setValue("received")
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
+                                            if (task.isSuccessful()) {
                                                 send_req.setEnabled(true);
-                                                CURRENT_STATE="request_sent";
+                                                CURRENT_STATE = "request_sent";
                                                 send_req.setText("Cancel Friend Request");
                                                 cancel_req.setVisibility(View.INVISIBLE);
                                                 cancel_req.setEnabled(false);

@@ -28,7 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FamilyTripInfo extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class FamilyTripInfo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     NavigationView navigationView;
@@ -39,8 +39,9 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
 
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef,TripRef,FriendRef;
-    String currentUserID,friendUserID;
+    private DatabaseReference UsersRef, TripRef, FriendRef;
+    String currentUserID, friendUserID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +52,7 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
         FriendRef = FirebaseDatabase.getInstance().getReference().child("Friends").child(currentUserID);
 
         TripRef = FirebaseDatabase.getInstance().getReference().child("Trips");
-        friendUserID=FirebaseDatabase.getInstance().getReference().child("Friends").child(currentUserID).toString();
+        friendUserID = FirebaseDatabase.getInstance().getReference().child("Friends").child(currentUserID).toString();
 
 
         tripList = (RecyclerView) findViewById(R.id.all_user_post_list);
@@ -62,10 +63,8 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
         tripList.setLayoutManager(linearLayoutManager);
 
 
-
-
         drawerLayout = findViewById(R.id.nav_drawer_main);
-        navigationView =(NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar1);
         View navView = navigationView.inflateHeaderView(R.layout.nav_header);
         NavProfileImage = (CircleImageView) navView.findViewById(R.id.profile_image);
@@ -80,22 +79,16 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
 
         UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(dataSnapshot.exists())
-                {
-                    if(dataSnapshot.hasChild("name"))
-                    {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("name")) {
                         String fullname = dataSnapshot.child("name").getValue().toString();
                         NavProfileUserName.setText(fullname);
                     }
-                    if(dataSnapshot.hasChild("profileimage"))
-                    {
+                    if (dataSnapshot.hasChild("profileimage")) {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
                         Picasso.with(FamilyTripInfo.this).load(image).placeholder(R.drawable.person).into(NavProfileImage);
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(FamilyTripInfo.this, "Profile name do not exists...", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -112,50 +105,63 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
     }
 
     private void JourneyInfo() {
-        // Query firebaseSearchQuery = FriendRef.orderByChild("uid").equalTo(friendUserID + "\uf0ff");
         FirebaseRecyclerAdapter<trip, allTripViewHolder> RecyclerAdapter =
                 new FirebaseRecyclerAdapter<trip, allTripViewHolder>
                         (
                                 trip.class,
                                 R.layout.trip_profile,
                                 allTripViewHolder.class,
-                                TripRef
+                                FriendRef
 
-                        )
-                {
+                        ) {
 
                     @Override
                     protected void populateViewHolder(allTripViewHolder viewHolder, trip model, int i) {
-                            viewHolder.setTime(model.getTime());
-                            final String userID=getRef(i).getKey();
-                            UsersRef.child(userID).addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.exists()){
-                                        final String username=dataSnapshot.child("name").getValue().toString();
-                                        final String profileImage=dataSnapshot.child("profileimage").getValue().toString();
+                        final String userID = getRef(i).getKey();
+                        TripRef.child(userID).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    final String Time = dataSnapshot.child("time").getValue().toString();
+                                    viewHolder.setTime("Started Journey at " + Time);
 
-                                        viewHolder.setName(username);
-                                        viewHolder.setProfileimage(getApplicationContext(),profileImage);
-                                    }
+                                } else {
+                                    final String Time = "This Person is not In Journey";
+                                    viewHolder.setTime(Time);
                                 }
+                            }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                            }
+                        });
+                        //final String userID=getRef(i).getKey();
+                        UsersRef.child(userID).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    final String username = dataSnapshot.child("name").getValue().toString();
+                                    final String profileImage = dataSnapshot.child("profileimage").getValue().toString();
+
+                                    viewHolder.setName(username);
+                                    viewHolder.setProfileimage(getApplicationContext(), profileImage);
                                 }
-                            });
+                            }
 
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-
+                            }
+                        });
 
                         viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                String visit_user_id=getRef(i).getKey();
+                                String visit_user_id = getRef(i).getKey();
 
-                                Intent intent = new Intent(FamilyTripInfo.this,TripInfo.class);
-                                intent.putExtra("visit_user_id",visit_user_id);
+                                Intent intent = new Intent(FamilyTripInfo.this, TripInfo.class);
+                                intent.putExtra("visit_user_id", visit_user_id);
                                 startActivity(intent);
                             }
                         });
@@ -172,16 +178,18 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
             super(itemView);
             mView = itemView;
         }
-        public void setProfileimage(Context ctx, String profileimage){
+
+        public void setProfileimage(Context ctx, String profileimage) {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.user_profile_pic);
             Picasso.with(ctx).load(profileimage).into(image);
         }
 
-        public void setName(String name){
+        public void setName(String name) {
             TextView username = (TextView) mView.findViewById(R.id.user_profile_name);
             username.setText(name);
         }
-        public void setTime(String time){
+
+        public void setTime(String time) {
             TextView juouneyTime = (TextView) mView.findViewById(R.id.journey_time);
             juouneyTime.setText(time);
         }
@@ -216,17 +224,17 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
     }
 
     private void SendUserToHomepage() {
-        Intent intent=new Intent(this,HomePage.class);
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
     private void SendUserToFamilyJourney() {
-        Intent intent=new Intent(this,FamilyTripInfo.class);
+        Intent intent = new Intent(this, FamilyTripInfo.class);
         startActivity(intent);
     }
 
     private void SendUserToTripInfo() {
-        Intent intent=new Intent(this,TripInfo.class);
+        Intent intent = new Intent(this, TripInfo.class);
         startActivity(intent);
     }
 
@@ -234,10 +242,12 @@ public class FamilyTripInfo extends AppCompatActivity implements  NavigationView
         Intent i = new Intent(FamilyTripInfo.this, FindFriends.class);
         startActivity(i);
     }
+
     private void SendUserToProfileActivity() {
         Intent i = new Intent(FamilyTripInfo.this, profile.class);
         startActivity(i);
     }
+
     private void SendUserToLoginActivity() {
         Intent loginIntent = new Intent(FamilyTripInfo.this, MainActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

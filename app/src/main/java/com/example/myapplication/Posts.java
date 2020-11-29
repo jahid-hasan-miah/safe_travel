@@ -1,14 +1,13 @@
 package com.example.myapplication;
 
 public class Posts {
-    public String uid, time, date, postimage, carnumber,accidentspot, profileimage, name;
+    public String uid, time, date, postimage, carnumber, accidentspot, profileimage, name;
 
-    public Posts()
-    {
+    public Posts() {
 
     }
 
-    public Posts(String uid, String time, String date, String postimage, String carnumber, String profileimage, String name,String accidentspot) {
+    public Posts(String uid, String time, String date, String postimage, String carnumber, String profileimage, String name, String accidentspot) {
         this.uid = uid;
         this.time = time;
         this.date = date;
@@ -16,7 +15,7 @@ public class Posts {
         this.carnumber = carnumber;
         this.profileimage = profileimage;
         this.name = name;
-        this.accidentspot=accidentspot;
+        this.accidentspot = accidentspot;
     }
 
     public String getUid() {
@@ -26,12 +25,13 @@ public class Posts {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
     public String getAccidentspot() {
         return accidentspot;
     }
 
     public void setAccidentspot(String accidentspot) {
-        this.accidentspot ="Accident Spot: "+ accidentspot;
+        this.accidentspot = "Accident Spot: " + accidentspot;
     }
 
     public String getTime() {
@@ -63,7 +63,7 @@ public class Posts {
     }
 
     public void setCarnumber(String carnumber) {
-        this.carnumber = "Car Number: "+ carnumber;
+        this.carnumber = "Car Number: " + carnumber;
     }
 
     public String getProfileimage() {
@@ -79,6 +79,6 @@ public class Posts {
     }
 
     public void setName(String name) {
-        this.name =name;
+        this.name = name;
     }
 }

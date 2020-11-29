@@ -43,7 +43,7 @@
             android:layout_marginStart="10dp"
             android:paddingStart="2dp"
             android:text="Time"
-            android:textColor="@android:color/darker_gray"
+            android:textColor="@color/colorAccent"
             android:textSize="14sp"
             android:textStyle="bold">
 

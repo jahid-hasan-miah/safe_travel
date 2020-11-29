@@ -16,7 +16,7 @@ public class scan_qr extends AppCompatActivity implements ResultHandler {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        scannerView=new ZXingScannerView(this);
+        scannerView = new ZXingScannerView(this);
         setContentView(scannerView);
     }
 

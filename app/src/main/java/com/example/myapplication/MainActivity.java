@@ -43,21 +43,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
-        UserRef= FirebaseDatabase.getInstance().getReference().child("Users");
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         UserEmail = (EditText) findViewById(R.id.login_email);
         UserPassword = (EditText) findViewById(R.id.login_password);
         loadingBar = new ProgressDialog(this);
 
-        TextView sign_up_link =(TextView) findViewById(R.id.sign_up_link);
-        sign_up_link.setOnClickListener(new View.OnClickListener(){
+        TextView sign_up_link = (TextView) findViewById(R.id.sign_up_link);
+        sign_up_link.setOnClickListener(new View.OnClickListener() {
             @Override
-                    public void onClick(View v) {
-                    openActivitySignup();
+            public void onClick(View v) {
+                openActivitySignup();
             }
         });
 
-        Button Button_log_in=(Button) findViewById(R.id.Button_log_in);
+        Button Button_log_in = (Button) findViewById(R.id.Button_log_in);
         Button_log_in.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser != null)
-        {
+        if (currentUser != null) {
             openActivityHomePage();
         }
     }
@@ -82,16 +81,11 @@ public class MainActivity extends AppCompatActivity {
         String email = UserEmail.getText().toString();
         String password = UserPassword.getText().toString();
 
-        if(TextUtils.isEmpty(email))
-        {
+        if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please write your email...", Toast.LENGTH_SHORT).show();
-        }
-        else if(TextUtils.isEmpty(password))
-        {
+        } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
+        } else {
             loadingBar.setTitle("Login");
             loadingBar.setMessage("Loging..");
             loadingBar.setCanceledOnTouchOutside(true);
@@ -101,12 +95,10 @@ public class MainActivity extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
-                        {
-                            if(task.isSuccessful())
-                            {
-                                String online_user_id=mAuth.getCurrentUser().getUid();
-                                String device_token= FirebaseInstanceId.getInstance().getToken();
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                String online_user_id = mAuth.getCurrentUser().getUid();
+                                String device_token = FirebaseInstanceId.getInstance().getToken();
                                 UserRef.child(online_user_id).child("device_token").setValue(device_token)
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
@@ -120,9 +112,7 @@ public class MainActivity extends AppCompatActivity {
                                         });
 
 
-                            }
-                            else
-                            {
+                            } else {
                                 String message = task.getException().getMessage();
                                 Toast.makeText(MainActivity.this, "Error occured: " + message, Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
@@ -133,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openActivitySignup() {
-        Intent intent = new Intent(this,SignUp.class);
+        Intent intent = new Intent(this, SignUp.class);
         startActivity(intent);
     }
 

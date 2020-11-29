@@ -45,7 +45,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener,
     private FirebaseAuth mAuth;
     private DatabaseReference UsersRef;
     private DatabaseReference NumberRef;
-    String currentUserID,value;
+    String currentUserID, value;
 
     public CardView card1, card2, card3, card4;
 
@@ -164,16 +164,13 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener,
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            int backButtonCount=1;
-            if(backButtonCount >= 1)
-            {
+            int backButtonCount = 1;
+            if (backButtonCount >= 1) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-            }
-            else
-            {
+            } else {
                 Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
                 backButtonCount++;
             }
@@ -206,7 +203,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener,
                 break;
 
             case R.id.emergency_call:
-                String emergencynumber="999";
+                String emergencynumber = "999";
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", emergencynumber, null));
                 startActivity(intent);
                 break;
@@ -241,19 +238,20 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener,
         }
         return true;
     }
+
     private void SendUserToHomepage() {
-        Intent intent=new Intent(this,HomePage.class);
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
     private void SendUserToFamilyJourney() {
-        Intent intent=new Intent(this,FamilyTripInfo.class);
+        Intent intent = new Intent(this, FamilyTripInfo.class);
         startActivity(intent);
     }
 
     private void SendUserToTripInfo() {
-        Intent intent=new Intent(this,TripInfo.class);
-        intent.putExtra("visit_user_id",currentUserID);
+        Intent intent = new Intent(this, TripInfo.class);
+        intent.putExtra("visit_user_id", currentUserID);
         startActivity(intent);
     }
 
@@ -261,6 +259,7 @@ public class HomePage extends AppCompatActivity implements View.OnClickListener,
         Intent i = new Intent(HomePage.this, profile.class);
         startActivity(i);
     }
+
     private void SendUserToFindFriendActivity() {
         Intent i = new Intent(HomePage.this, FindFriends.class);
         startActivity(i);

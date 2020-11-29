@@ -2,7 +2,7 @@ package com.example.myapplication;
 
 public class FriendList {
 
-    public String profileimage,name,email;
+    public String profileimage, name, email;
 
     public FriendList() {
 

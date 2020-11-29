@@ -33,7 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class profile extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+public class profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
     DrawerLayout drawerLayout;
@@ -41,11 +41,11 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
     NavigationView navigationView;
 
     private RecyclerView postList;
-    private CircleImageView NavProfileImage,ProfilePicture;
-    private TextView NavProfileUserName,ProfileName,Email;
+    private CircleImageView NavProfileImage, ProfilePicture;
+    private TextView NavProfileUserName, ProfileName, Email;
 
     private FirebaseAuth mAuth;
-    private DatabaseReference UsersRef,PostsRef;
+    private DatabaseReference UsersRef, PostsRef;
     String currentUserID;
 
     private Button add_profile_picture;
@@ -54,7 +54,7 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        add_profile_picture=(Button) findViewById(R.id.profile_image);
+        add_profile_picture = (Button) findViewById(R.id.profile_image);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -70,15 +70,14 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
         postList.setLayoutManager(linearLayoutManager);
 
 
-
         drawerLayout = findViewById(R.id.nav_drawer_main);
-        navigationView =(NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar1);
         View navView = navigationView.inflateHeaderView(R.layout.nav_header);
         NavProfileImage = (CircleImageView) navView.findViewById(R.id.profile_image);
         NavProfileUserName = (TextView) navView.findViewById(R.id.nav_user_full_name);
 
-        ProfilePicture = (CircleImageView)findViewById(R.id.profile_picture);
+        ProfilePicture = (CircleImageView) findViewById(R.id.profile_picture);
         ProfileName = (TextView) findViewById(R.id.user_name);
         Email = (TextView) findViewById(R.id.user_email);
 
@@ -91,24 +90,18 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
 
         UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(dataSnapshot.exists())
-                {
-                    if(dataSnapshot.hasChild("name"))
-                    {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("name")) {
                         String fullname = dataSnapshot.child("name").getValue().toString();
                         NavProfileUserName.setText(fullname);
 
                     }
-                    if(dataSnapshot.hasChild("profileimage"))
-                    {
+                    if (dataSnapshot.hasChild("profileimage")) {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
                         Picasso.with(profile.this).load(image).placeholder(R.drawable.person).into(NavProfileImage);
 
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(profile.this, "Profile name do not exists...", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -123,25 +116,20 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
 
         UsersRef.child(currentUserID).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot){
-                if(dataSnapshot.exists())
-                {
-                    if(dataSnapshot.hasChild("name"))
-                    {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("name")) {
                         String fullname = dataSnapshot.child("name").getValue().toString();
                         ProfileName.setText(fullname);
                     }
-                    if(dataSnapshot.hasChild("email"))
-                    {
+                    if (dataSnapshot.hasChild("email")) {
                         String email = dataSnapshot.child("email").getValue().toString();
                         Email.setText(email);
                     }
-                    if(dataSnapshot.hasChild("profileimage")) {
+                    if (dataSnapshot.hasChild("profileimage")) {
                         String image = dataSnapshot.child("profileimage").getValue().toString();
                         Picasso.with(profile.this).load(image).placeholder(R.drawable.person).into(ProfilePicture);
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(profile.this, "Profile name do not exists...", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -167,8 +155,8 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
     }
 
     private void DisplayThisUsersPosts() {
-        Query myPostQuery =PostsRef.orderByChild("uid")
-                .startAt(currentUserID).endAt(currentUserID+"\uf0ff");
+        Query myPostQuery = PostsRef.orderByChild("uid")
+                .startAt(currentUserID).endAt(currentUserID + "\uf0ff");
         FirebaseRecyclerAdapter<Posts, PostsViewHolder> firebaseRecyclerAdapter =
                 new FirebaseRecyclerAdapter<Posts, PostsViewHolder>
                         (
@@ -176,12 +164,10 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
                                 R.layout.all_post,
                                 PostsViewHolder.class,
                                 myPostQuery
-                        )
-                {
+                        ) {
 
                     @Override
-                    protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position)
-                    {
+                    protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position) {
                         viewHolder.setName(model.getName());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());
@@ -194,87 +180,73 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
         postList.setAdapter(firebaseRecyclerAdapter);
 
     }
-    public static class PostsViewHolder extends RecyclerView.ViewHolder
-    {
+
+    public static class PostsViewHolder extends RecyclerView.ViewHolder {
         View mView;
 
-        public PostsViewHolder(View itemView)
-        {
+        public PostsViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
         }
 
-        public void setName(String name)
-        {
+        public void setName(String name) {
             TextView username = (TextView) mView.findViewById(R.id.post_user_name);
             username.setText(name);
         }
 
-        public void setProfileimage(Context ctx, String profileimage)
-        {
+        public void setProfileimage(Context ctx, String profileimage) {
             CircleImageView image = (CircleImageView) mView.findViewById(R.id.post_profile_image);
             Picasso.with(ctx).load(profileimage).into(image);
         }
 
 
-        public void setTime(String time)
-        {
+        public void setTime(String time) {
             TextView PostTime = (TextView) mView.findViewById(R.id.time);
             PostTime.setText(time);
         }
 
 
-        public void setDate(String date)
-        {
+        public void setDate(String date) {
             TextView PostDate = (TextView) mView.findViewById(R.id.date);
             PostDate.setText(date);
         }
 
-        public void setCarnumber(String carnumber)
-        {
+        public void setCarnumber(String carnumber) {
             TextView PostDescription = (TextView) mView.findViewById(R.id.car_number);
             PostDescription.setText(carnumber);
         }
-        public void setAccidentspot(String accidentspot)
-        {
+
+        public void setAccidentspot(String accidentspot) {
             TextView PostDescription = (TextView) mView.findViewById(R.id.post_description);
             PostDescription.setText(accidentspot);
         }
 
-        public void setPostimage(Context ctx1,  String postimage)
-        {
+        public void setPostimage(Context ctx1, String postimage) {
             ImageView PostImage = (ImageView) mView.findViewById(R.id.post_image);
             Picasso.with(ctx1).load(postimage).into(PostImage);
         }
     }
 
     @Override
-    protected void onStart()
-    {
+    protected void onStart() {
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
-        if(currentUser == null)
-        {
+        if (currentUser == null) {
             SendUserToLoginActivity();
-        }
-        else
-        {
+        } else {
             CheckUserExistence();
         }
     }
 
-    private void CheckUserExistence()
-    {
+    private void CheckUserExistence() {
         final String current_user_id = mAuth.getCurrentUser().getUid();
 
         UsersRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot)
-            {
-                if(!dataSnapshot.hasChild(current_user_id))
-                {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.hasChild(current_user_id)) {
                     SendUserToSetupActivity();
                 }
             }
@@ -286,8 +258,7 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
         });
     }
 
-    private void SendUserToSetupActivity()
-    {
+    private void SendUserToSetupActivity() {
         Intent setupIntent = new Intent(profile.this, MainActivity.class);
         setupIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(setupIntent);
@@ -320,18 +291,19 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
         }
         return true;
     }
+
     private void SendUserToHomepage() {
-        Intent intent=new Intent(this,HomePage.class);
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
     private void SendUserToFamilyJourney() {
-        Intent intent=new Intent(this,FamilyTripInfo.class);
+        Intent intent = new Intent(this, FamilyTripInfo.class);
         startActivity(intent);
     }
 
     private void SendUserToTripInfo() {
-        Intent intent=new Intent(this,TripInfo.class);
+        Intent intent = new Intent(this, TripInfo.class);
         startActivity(intent);
     }
 
@@ -340,15 +312,17 @@ public class profile extends AppCompatActivity implements  NavigationView.OnNavi
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            Intent intent = new Intent(profile.this,HomePage.class);
+            Intent intent = new Intent(profile.this, HomePage.class);
             startActivity(intent);
             finish();
         }
     }
+
     private void SendUserToProfileActivity() {
         Intent i = new Intent(profile.this, profile.class);
         startActivity(i);
     }
+
     private void SendUserToLoginActivity() {
         Intent loginIntent = new Intent(profile.this, MainActivity.class);
         loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -2,14 +2,14 @@ package com.example.myapplication;
 
 public class trip {
 
-    private  String time;
-    private String name,uid;
+    private String time;
+    private String name, uid;
     public String profileimage;
 
     public trip() {
     }
 
-    public trip(String time,String uid, String name, String profileimage) {
+    public trip(String time, String uid, String name, String profileimage) {
         this.time = time;
         this.name = name;
         this.uid = uid;
@@ -23,6 +23,7 @@ public class trip {
     public void setTime(String time) {
         this.time = time;
     }
+
     public String getUid() {
         return uid;
     }

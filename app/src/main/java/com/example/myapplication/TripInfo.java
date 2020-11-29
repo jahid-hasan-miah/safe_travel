@@ -90,7 +90,10 @@ public class TripInfo extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(TripInfo.this, "Profile name do not exists...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(TripInfo.this, "This Person Is not having Journey", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(TripInfo.this,HomePage.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
 

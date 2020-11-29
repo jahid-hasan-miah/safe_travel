@@ -231,7 +231,8 @@ public class start_trip extends AppCompatActivity implements LocationListener, O
     }
 
     private void OpenTripInfo() {
-        Intent intent=new Intent(this,TripInfo.class);
+        Intent intent = new Intent(start_trip.this,TripInfo.class);
+        intent.putExtra("visit_user_id",PassengerID);
         startActivity(intent);
     }
 

@@ -31,7 +31,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class AddProfilePicture extends AppCompatActivity {
 
-    private Button update_image,close,change_picture;
+    private Button update_image, close, change_picture;
     private ImageButton ProfileImage;
     private ProgressDialog loadingBar;
     private Uri ImageUri;
@@ -41,7 +41,7 @@ public class AddProfilePicture extends AppCompatActivity {
 
     private String downloadUrl;
 
-    private String myUri="";
+    private String myUri = "";
     private StorageTask uploadTask;
 
     String currentUserID;
@@ -95,7 +95,8 @@ public class AddProfilePicture extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(AddProfilePicture.this, profile.class);
                 startActivity(i);
-                finish();            }
+                finish();
+            }
         });
 
         getUserInfo();
@@ -103,43 +104,36 @@ public class AddProfilePicture extends AppCompatActivity {
     }
 
     private void getUserInfo() {
-                    UsersRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists())
-                            {
-                                if (dataSnapshot.hasChild("profileimage"))
-                                {
-                                    String image = dataSnapshot.child("profileimage").getValue().toString();
-                                    Picasso.with(AddProfilePicture.this).load(image).placeholder(R.drawable.person).into(ProfileImage);
-                                }
-                                else
-                                {
-                                    Toast.makeText(AddProfilePicture.this, "Please select profile image first.", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
+        UsersRef.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    if (dataSnapshot.hasChild("profileimage")) {
+                        String image = dataSnapshot.child("profileimage").getValue().toString();
+                        Picasso.with(AddProfilePicture.this).load(image).placeholder(R.drawable.person).into(ProfileImage);
+                    } else {
+                        Toast.makeText(AddProfilePicture.this, "Please select profile image first.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        }
-                    });
+            }
+        });
 
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE)
-        {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
 
-            if(resultCode == RESULT_OK)
-            {
+            if (resultCode == RESULT_OK) {
                 loadingBar.setTitle("Profile Image");
                 loadingBar.setMessage("Please wait, while we updating your profile image...");
                 loadingBar.show();
@@ -157,7 +151,7 @@ public class AddProfilePicture extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
 
-                                downloadUrl=uri.toString();
+                                downloadUrl = uri.toString();
                                 Toast.makeText(AddProfilePicture.this, "image uploaded successfully to Storage...", Toast.LENGTH_SHORT).show();
                                 ProfileImage.setImageURI(resultUri);
                                 SaveProfilePicture();
@@ -165,9 +159,7 @@ public class AddProfilePicture extends AppCompatActivity {
                         });
                     }
                 });
-            }
-            else
-            {
+            } else {
                 Toast.makeText(this, "Error Occured: Image can not be cropped. Try Again.", Toast.LENGTH_SHORT).show();
                 loadingBar.dismiss();
             }
@@ -177,19 +169,14 @@ public class AddProfilePicture extends AppCompatActivity {
     private void SaveProfilePicture() {
 
 
-
         UsersRef.child("profileimage").setValue(downloadUrl)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task)
-                    {
-                        if(task.isSuccessful())
-                        {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
                             Toast.makeText(AddProfilePicture.this, "Profile Image stored to Firebase Database Successfully", Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
-                        }
-                        else
-                        {
+                        } else {
                             String message = task.getException().getMessage();
                             Toast.makeText(AddProfilePicture.this, "Error Occured: " + message, Toast.LENGTH_SHORT).show();
                             loadingBar.dismiss();
