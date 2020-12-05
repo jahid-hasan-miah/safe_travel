@@ -137,6 +137,7 @@ public class SignUp_3 extends AppCompatActivity implements AdapterView.OnItemSel
                     success.show();
                     openActivitySignup_4();
                     progressDialog.dismiss();
+                    finish();
                 } else {
                     String messege = task.getException().getMessage();
                     progressDialog.setMessage("Error Occurd");

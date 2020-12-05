@@ -40,7 +40,7 @@ public class NewsFeed extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
 
     private RecyclerView postList;
-    private CircleImageView NavProfileImage;
+    private CircleImageView NavProfileImage,profileImage;
     private TextView NavProfileUserName;
 
     private FirebaseAuth mAuth;
@@ -76,6 +76,7 @@ public class NewsFeed extends AppCompatActivity implements NavigationView.OnNavi
         NavProfileImage = (CircleImageView) navView.findViewById(R.id.profile_image);
         NavProfileUserName = (TextView) navView.findViewById(R.id.nav_user_full_name);
 
+        profileImage=(CircleImageView) navView.findViewById(R.id.post_profile_image);
         setSupportActionBar(toolbar);
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -129,6 +130,7 @@ public class NewsFeed extends AppCompatActivity implements NavigationView.OnNavi
 
                     @Override
                     protected void populateViewHolder(PostsViewHolder viewHolder, Posts model, int position) {
+
                         viewHolder.setName(model.getName());
                         viewHolder.setTime(model.getTime());
                         viewHolder.setDate(model.getDate());

@@ -119,6 +119,7 @@ public class SignUp_4 extends AppCompatActivity {
                     openActivityLogin();
                     Toast success = Toast.makeText(SignUp_4.this, "Sign Up Successfull,Please Log in", Toast.LENGTH_LONG);
                     success.show();
+                    finish();
                 } else {
                     String messege = task.getException().getMessage();
                     progressDialog.setMessage("Error Occurd");

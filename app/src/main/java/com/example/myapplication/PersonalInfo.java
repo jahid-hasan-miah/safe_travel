@@ -64,7 +64,7 @@ public class PersonalInfo extends AppCompatActivity {
                     name.setText(fullname);
                     String person_email = dataSnapshot.child("email").getValue().toString();
                     email.setText(person_email);
-                    String person_contact = dataSnapshot.child("contact").getValue().toString();
+                    String person_contact = dataSnapshot.child("number").getValue().toString();
                     contact.setText(person_contact);
                     String image = dataSnapshot.child("profileimage").getValue().toString();
                     Picasso.with(PersonalInfo.this).load(image).placeholder(R.drawable.person).into(profilePic);

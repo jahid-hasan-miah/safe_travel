@@ -136,6 +136,7 @@ public class SignUp_2 extends AppCompatActivity {
                         success.show();
                         openActivitySignup_3();
                         progressDialog.dismiss();
+                        finish();
                     } else {
                         String messege = task.getException().getMessage();
                         progressDialog.setMessage("Error Occurd");

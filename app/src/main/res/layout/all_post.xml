@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:background="@drawable/round_shape_border"
+    android:background="@android:color/white"
     android:padding="5dp">
 
     <LinearLayout
@@ -46,7 +46,7 @@
                     android:layout_marginTop="4dp"
                     android:text="user name"
                     android:textAlignment="textStart"
-                    android:textColor="@android:color/white"
+                    android:textColor="@android:color/black"
                     android:textSize="16sp"
                     android:textStyle="bold">
 
@@ -102,7 +102,7 @@
         android:layout_marginEnd="10dp"
         android:padding="5dp"
         android:text="Post Description..."
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,7 +117,7 @@
         android:layout_marginEnd="10dp"
         android:padding="5dp"
         android:text="@string/car_number"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

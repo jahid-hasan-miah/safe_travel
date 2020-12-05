@@ -106,14 +106,16 @@ public class SignUp extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     Toast success = Toast.makeText(SignUp.this, "Data Recorded Successfully", Toast.LENGTH_SHORT);
                                     success.show();
+                                    openActivitySignup_2();
                                     progressDialog.dismiss();
+                                    finish();
                                 } else {
                                     String messege = task.getException().getMessage();
                                     progressDialog.setMessage("Error Occurd");
                                 }
                             }
                         });
-                        openActivitySignup_2();
+
                     } else {
                         // If sign in fails, display a message to the user.
                         progressDialog.dismiss();
